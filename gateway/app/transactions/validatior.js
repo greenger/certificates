@@ -1,4 +1,4 @@
-const trendThreshold = [-1, 1];
+const trendThreshold = [-0.5, 0.5];
 const lastPoints = 10;
 const avgPoints = 30;
 
@@ -28,7 +28,7 @@ function verifyPwrTrend(items) {
     }
     let trend = lastAvg/chartAvg;
     console.log("Power supply trend ", trend);
-    return trend >= trendThreshold[0] && trend <= trendThreshold[1];
+    return trend <= trendThreshold[0] && trend >= trendThreshold[1];
 }
 
 module.exports = isValid;
