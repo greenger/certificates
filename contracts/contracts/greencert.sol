@@ -67,4 +67,39 @@ contract GreenCert is ERC721Full, ERC721Mintable {
         }
         return (false, address(0x0));
     }
+
+    function tokenURI(uint256 idx) external view returns (string memory) {
+        require(_exists(idx), "ERC721Metadata: URI set of nonexistent token");
+        return strConcat("http://159.69.251.155/verify/", uint2str(idx));
+    }
+
+    function uint2str(uint256 _i) internal pure returns (string memory _uintAsString) {
+        if (_i == 0) {
+            return "0";
+        }
+        uint256 j = _i;
+        uint len;
+        while (j != 0) {
+            len++;
+            j /= 10;
+        }
+        bytes memory bstr = new bytes(len);
+        uint k = len - 1;
+        while (_i != 0) {
+            bstr[k--] = byte(uint8(48 + _i % 10));
+            _i /= 10;
+        }
+        return string(bstr);
+    }
+
+    function strConcat(string memory _a, string memory _b) internal pure returns (string memory){
+        bytes memory _ba = bytes(_a);
+        bytes memory _bb = bytes(_b);
+        string memory abcde = new string(_ba.length + _bb.length);
+        bytes memory babcde = bytes(abcde);
+        uint k = 0;
+        for (uint i = 0; i < _ba.length; i++) babcde[k++] = _ba[i];
+        for (uint i = 0; i < _bb.length; i++) babcde[k++] = _bb[i];
+        return string(babcde);
+    }
 }
