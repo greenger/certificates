@@ -7,8 +7,9 @@ node_js:
   - "10"
 
 install:
-  - npm install -g truffle ethereumjs-testrpc
+  - npm install openzeppelin-solidity
+  - npm install -g truffle ganache-cli
 
 script:
-  - nohup testrpc &
+  - nohup ganache-cli &
   - cd contracts && truffle test
