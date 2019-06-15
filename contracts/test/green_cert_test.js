@@ -22,7 +22,7 @@ class cert {
     }
 
     async transfer(to) {
-        await this.contract.transfer(to, this.certNum, {from: this.owner});
+        await this.contract.transferFrom(this.owner, to, this.certNum, {from: this.owner});
         this.owner = await this.contract.ownerOf(this.certNum);
         return this.owner === to;
     }
@@ -57,6 +57,14 @@ contract('Green certificates issuing and circulation test', (accounts) => {
         await contract.addVerificator(vrf, "verificator");
     });
 
+    it('Check is owner minter (for ERC721)', async () => {
+        assert.ok(await contract.isMinter(accounts[0]));
+    });
+
+    it('Check is verificator minter (for ERC721)', async () => {
+        assert.ok(await contract.isMinter(vrf));
+    });
+
     it('Adding records to ledger', async () => {
         for (let i = 0; i < certCount; i++) {
              let crt = new cert(contract, accounts.slice(1,4), 3);
@@ -81,7 +89,7 @@ contract('Green certificates issuing and circulation test', (accounts) => {
                  let to = accounts[5 + toId];
                  if (!to) continue;
                  if (to === certs[i].owner) continue;
-                 assert.ok(await certs[i].transfer(vrf));
+                 assert.ok(await certs[i].transfer(to));
             }
         }
     });
