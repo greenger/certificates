@@ -4,8 +4,9 @@ ERC721 Green Certificates and their transfers exporer https://kovan.etherscan.io
 
 for testing smart-contracts
 ```
-$ sudo npm install -g truffle ethereumjs-testrpc
-$ testrpc
+$ sudo npm install -g truffle ganache-cli
+$ npm install openzeppelin-solidity
+$ ganache-cli
 ```
 in other console
 ```
