@@ -18,7 +18,7 @@
   "homepage": "https://github.com/LikeAnOw1/green_cert#readme",
   "dependencies": {
     "ethereumjs-tx": "^1.3.7",
-    "express": "^4.14.0",
+    "express": "^4.17.3",
     "mathjs": "^5.10.3",
     "mongodb": "^2.2.16",
     "web3": "^1.0.0-beta.55"
